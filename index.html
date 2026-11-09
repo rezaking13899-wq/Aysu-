@@ -1,0 +1,1291 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#061329">
+<title>The World of Aysu 💙</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --blue:#65baff;
+  --light:#c8e8ff;
+  --deep:#061329;
+}
+
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body {
+  font-family:'Vazirmatn',sans-serif;
+  color:white;
+  background:#061329;
+  min-height:100vh;
+  overflow:hidden;
+  user-select:none;
+}
+
+button {
+  font:inherit;
+  cursor:pointer;
+}
+
+/* BACKGROUND */
+
+#space {
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse at 50% 85%,#174a7b 0%,transparent 48%),
+    radial-gradient(ellipse at 80% 10%,#163b71 0%,transparent 40%),
+    linear-gradient(180deg,#030b1b,#071b39 55%,#0a2546);
+}
+
+#stars {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+}
+
+.aurora {
+  position:absolute;
+  width:70vw;
+  height:50vw;
+  left:15%;
+  top:10%;
+  border-radius:50%;
+  background:#288bff;
+  filter:blur(110px);
+  opacity:.12;
+  animation:aurora 12s ease-in-out infinite alternate;
+  pointer-events:none;
+}
+
+@keyframes aurora {
+  from { transform:translate(-10%,-5%) scale(.8); }
+  to { transform:translate(15%,10%) scale(1.2); }
+}
+
+#app {
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100dvh;
+}
+
+/* SCREENS */
+
+.screen {
+  position:absolute;
+  inset:0;
+  display:none;
+  overflow:hidden;
+  animation:screenIn .7s ease both;
+}
+
+.screen.active {
+  display:block;
+}
+
+@keyframes screenIn {
+  from { opacity:0; transform:scale(1.025); }
+  to { opacity:1; transform:scale(1); }
+}
+
+/* INTRO - IMPORTANT FIX */
+
+#intro {
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+  z-index:5;
+}
+
+#intro.active {
+  display:flex;
+}
+
+.intro-content {
+  max-width:650px;
+  position:relative;
+  z-index:2;
+}
+
+.moon {
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  margin:0 auto 32px;
+  background:radial-gradient(circle at 35% 30%,#fff,#b7e3ff 35%,#65a9e7 75%);
+  box-shadow:0 0 35px #80c7ff,0 0 110px #378be8;
+  animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-18px); }
+}
+
+.eyebrow {
+  color:#92ceff;
+  font-size:11px;
+  letter-spacing:5px;
+  direction:ltr;
+  margin-bottom:15px;
+}
+
+.intro-content h1 {
+  font-size:clamp(34px,7vw,68px);
+  line-height:1.3;
+  text-shadow:0 0 30px #5caaff;
+  direction:ltr;
+}
+
+.intro-content h1 span {
+  color:#a9dcff;
+}
+
+.intro-content p {
+  color:#c0d8f2;
+  margin:18px 0 30px;
+  font-size:14px;
+}
+
+.primary-btn {
+  border:1px solid #a9ddff;
+  color:#07182f;
+  padding:14px 35px;
+  border-radius:50px;
+  background:linear-gradient(120deg,#e3f5ff,#7bc4ff);
+  box-shadow:0 0 30px #52aaff65;
+  transition:.3s;
+  font-weight:800;
+}
+
+.primary-btn:hover {
+  transform:translateY(-4px) scale(1.04);
+  box-shadow:0 0 45px #69baff;
+}
+
+/* GAME WORLD */
+
+#world {
+  perspective:1100px;
+  isolation:isolate;
+}
+
+.topbar {
+  position:absolute;
+  z-index:20;
+  top:22px;
+  left:25px;
+  right:25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+}
+
+.logo {
+  font-size:12px;
+  letter-spacing:3px;
+  direction:ltr;
+  color:#b6dcff;
+}
+
+.progress-wrap {
+  width:min(190px,35vw);
+  text-align:left;
+}
+
+.progress-label {
+  font-size:10px;
+  color:#aac8e9;
+  margin-bottom:6px;
+}
+
+.progress {
+  height:5px;
+  background:#ffffff20;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress span {
+  display:block;
+  width:0;
+  height:100%;
+  background:#83ceff;
+  box-shadow:0 0 12px #83ceff;
+  transition:width .5s;
+}
+
+#sound {
+  border:1px solid #8bcaff55;
+  background:#0e3154aa;
+  color:#d7efff;
+  border-radius:30px;
+  padding:8px 12px;
+  font-size:11px;
+}
+
+.world-title {
+  position:absolute;
+  top:14%;
+  width:100%;
+  text-align:center;
+  z-index:10;
+  pointer-events:none;
+}
+
+.world-title h2 {
+  font-size:clamp(22px,4vw,38px);
+  text-shadow:0 0 25px #64b9ff;
+}
+
+.world-title p {
+  color:#aac9e9;
+  font-size:12px;
+  margin-top:8px;
+}
+
+/* CAMERA */
+
+.world-scene {
+  position:absolute;
+  inset:0;
+  transform-style:preserve-3d;
+  transform-origin:center center;
+  transition:transform .15s ease-out;
+  pointer-events:none;
+}
+
+/* CLOUDS */
+
+.cloud {
+  position:absolute;
+  width:180px;
+  height:55px;
+  border-radius:100px;
+  background:#6daeea15;
+  filter:blur(12px);
+  animation:cloud 14s ease-in-out infinite alternate;
+}
+
+.cloud.one { top:30%;left:5%; }
+.cloud.two { top:55%;right:4%;animation-delay:-5s; }
+.cloud.three { top:70%;left:35%;animation-delay:-8s; }
+
+@keyframes cloud {
+  to { transform:translateX(90px) translateY(-20px); }
+}
+
+/* ISLANDS */
+
+.island {
+  position:absolute;
+  width:150px;
+  height:145px;
+  transform-style:preserve-3d;
+  cursor:pointer;
+  pointer-events:auto;
+  transition:filter .3s;
+  animation:islandFloat 5s ease-in-out infinite;
+  z-index:5;
+}
+
+.island:hover {
+  filter:brightness(1.3);
+}
+
+@keyframes islandFloat {
+  0%,100% { translate:0 0; }
+  50% { translate:0 -16px; }
+}
+
+.island:nth-child(2) { animation-delay:-2s; }
+.island:nth-child(3) { animation-delay:-3.5s; }
+
+.island .rock {
+  position:absolute;
+  left:15px;
+  top:65px;
+  width:120px;
+  height:80px;
+  background:linear-gradient(140deg,#376d9d,#112e54 75%);
+  clip-path:polygon(0 0,100% 0,70% 75%,40% 100%,20% 65%);
+  filter:drop-shadow(0 15px 15px #0009);
+  transform:rotateX(12deg);
+}
+
+.island .top {
+  position:absolute;
+  top:50px;
+  left:0;
+  width:150px;
+  height:45px;
+  border-radius:50%;
+  background:radial-gradient(ellipse,#a8e5ff,#3d8ecb 65%,#21547f);
+  box-shadow:0 0 25px #52baff90;
+  transform:rotateX(8deg);
+}
+
+.island .light {
+  position:absolute;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  background:white;
+  top:65px;
+  left:69px;
+  box-shadow:0 0 15px 8px #83d4ff;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse {
+  50% { opacity:.35; transform:scale(.65); }
+}
+
+.island .label {
+  position:absolute;
+  top:5px;
+  width:100%;
+  text-align:center;
+  font-size:12px;
+  color:#e4f4ff;
+  text-shadow:0 2px 12px #62baff;
+}
+
+.island .number {
+  position:absolute;
+  top:105px;
+  width:100%;
+  text-align:center;
+  font-size:11px;
+  color:#c9e9ff;
+}
+
+.island.locked {
+  filter:grayscale(.8) brightness(.55);
+}
+
+.island.locked::after {
+  content:'🔒';
+  position:absolute;
+  top:62px;
+  left:65px;
+  z-index:6;
+}
+
+.island:not(.locked):hover {
+  transform:scale(1.08);
+}
+
+.world-hint {
+  position:absolute;
+  bottom:25px;
+  width:100%;
+  text-align:center;
+  color:#9dbfdf;
+  font-size:11px;
+  z-index:10;
+  pointer-events:none;
+}
+
+/* ISLAND POSITIONS */
+
+#island1 {
+  left:calc(50% - 75px);
+  top:35%;
+}
+
+#island2 {
+  left:calc(22% - 75px);
+  top:53%;
+}
+
+#island3 {
+  right:calc(22% - 75px);
+  top:53%;
+}
+
+#island4 {
+  left:calc(50% - 75px);
+  top:72%;
+  transform:scale(.9);
+}
+
+/* PANEL */
+
+#panel {
+  position:fixed;
+  inset:0;
+  z-index:50;
+  display:none;
+  justify-content:center;
+  align-items:center;
+  padding:18px;
+  background:#020a18b8;
+  backdrop-filter:blur(12px);
+}
+
+#panel.show {
+  display:flex;
+}
+
+.panel-card {
+  position:relative;
+  width:min(550px,100%);
+  max-height:85dvh;
+  overflow:auto;
+  border:1px solid #8dcfff55;
+  border-radius:25px;
+  padding:30px;
+  background:
+    radial-gradient(circle at 50% 0%,#1b5480 0%,transparent 60%),
+    linear-gradient(145deg,#102d4e,#07172d);
+  box-shadow:0 0 80px #247bc555,inset 0 0 30px #7bcaff0c;
+  text-align:center;
+  animation:pop .4s cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes pop {
+  from { opacity:0;transform:translateY(35px) scale(.9); }
+  to { opacity:1;transform:translateY(0) scale(1); }
+}
+
+.close {
+  position:absolute;
+  top:13px;
+  left:15px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:1px solid #ffffff30;
+  background:#ffffff12;
+  color:white;
+}
+
+.panel-card h2 {
+  font-size:24px;
+  color:#c5e7ff;
+  margin:8px 0 15px;
+}
+
+.panel-card p {
+  color:#c4d8ec;
+  line-height:2.2;
+  font-size:14px;
+}
+
+.small-btn {
+  border:1px solid #8bcaff80;
+  color:#e5f5ff;
+  background:#2777b74d;
+  border-radius:30px;
+  padding:10px 24px;
+  margin-top:20px;
+  transition:.25s;
+}
+
+.small-btn:hover {
+  background:#398fce;
+  box-shadow:0 0 20px #65baff88;
+}
+
+/* LETTER */
+
+.type-text {
+  min-height:110px;
+  text-align:center;
+  line-height:2.3;
+  color:#e3f3ff;
+}
+
+/* HEART GAME */
+
+.heart-game {
+  position:relative;
+  height:260px;
+  border:1px solid #83caff35;
+  border-radius:18px;
+  overflow:hidden;
+  margin-top:18px;
+  background:radial-gradient(circle,#1d5484,#071a32);
+}
+
+.hidden-heart {
+  position:absolute;
+  font-size:26px;
+  border:0;
+  background:transparent;
+  animation:heartGlow 1.8s infinite alternate;
+  transition:.2s;
+}
+
+.hidden-heart:hover {
+  transform:scale(1.4);
+}
+
+@keyframes heartGlow {
+  to { filter:drop-shadow(0 0 12px #75caff); }
+}
+
+.score {
+  color:#9dd7ff;
+  margin-top:10px;
+  font-size:13px;
+}
+
+/* GALLERY */
+
+.gallery {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.gallery img {
+  width:100%;
+  height:155px;
+  object-fit:cover;
+  border-radius:15px;
+  border:1px solid #8bcaff55;
+  cursor:pointer;
+  transition:.35s;
+  background:#173958;
+}
+
+.gallery img:hover {
+  transform:scale(1.045);
+  box-shadow:0 0 25px #65baff70;
+}
+
+/* LIGHTBOX */
+
+#lightbox {
+  position:fixed;
+  z-index:100;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:#020713ed;
+  padding:20px;
+}
+
+#lightbox.show {
+  display:flex;
+}
+
+#lightbox img {
+  max-width:95%;
+  max-height:85%;
+  object-fit:contain;
+  border-radius:16px;
+  box-shadow:0 0 50px #67baff55;
+}
+
+/* FINAL CHEST */
+
+.chest {
+  font-size:95px;
+  cursor:pointer;
+  display:inline-block;
+  margin:15px;
+  filter:drop-shadow(0 0 25px #73baff);
+  transition:.3s;
+  animation:float 3s infinite;
+}
+
+.chest:hover {
+  transform:scale(1.12);
+}
+
+.final-message {
+  display:none;
+  padding:18px;
+  border:1px solid #8bcaff55;
+  background:#8acaff12;
+  border-radius:16px;
+  margin-top:15px;
+  animation:pop .6s both;
+}
+
+.final-message.show {
+  display:block;
+}
+
+/* MOBILE */
+
+@media(max-width:600px) {
+  .topbar {
+    top:15px;
+    left:12px;
+    right:12px;
+  }
+
+  .logo {
+    font-size:9px;
+    letter-spacing:1px;
+  }
+
+  #sound {
+    font-size:9px;
+    padding:7px 9px;
+  }
+
+  .progress-wrap {
+    width:100px;
+  }
+
+  .world-title {
+    top:16%;
+  }
+
+  .world-title h2 {
+    font-size:23px;
+  }
+
+  .world-title p {
+    font-size:10px;
+  }
+
+  .island {
+    scale:.82;
+  }
+
+  #island1 {
+    left:calc(50% - 62px);
+    top:34%;
+  }
+
+  #island2 {
+    left:1%;
+    top:52%;
+  }
+
+  #island3 {
+    right:1%;
+    top:52%;
+  }
+
+  #island4 {
+    left:calc(50% - 62px);
+    top:72%;
+    transform:scale(.82);
+  }
+
+  .world-hint {
+    bottom:12px;
+  }
+
+  .panel-card {
+    padding:25px 18px;
+    max-height:88dvh;
+  }
+
+  .gallery img {
+    height:125px;
+  }
+}
+
+@media(max-height:650px) {
+  .world-title {
+    top:13%;
+  }
+
+  #island1 { top:29%; }
+  #island2,#island3 { top:49%; }
+  #island4 { top:70%; }
+
+  .world-hint { bottom:8px; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="space">
+  <canvas id="stars"></canvas>
+  <div class="aurora"></div>
+  <div class="cloud one"></div>
+  <div class="cloud two"></div>
+  <div class="cloud three"></div>
+</div>
+
+<div id="app">
+
+  <!-- INTRO -->
+  <section id="intro" class="screen active">
+    <div class="intro-content">
+      <div class="moon"></div>
+      <div class="eyebrow">A WORLD MADE FOR YOU</div>
+      <h1>THE WORLD OF<br><span>Aysu</span></h1>
+      <p>یک ماجراجویی کوچک، برای خاص‌ترین آدم دنیا...</p>
+      <button class="primary-btn" onclick="startGame()">
+        ورود به دنیای من ✦
+      </button>
+    </div>
+  </section>
+
+  <!-- WORLD -->
+  <section id="world" class="screen">
+
+    <div class="topbar">
+      <div class="logo">Aysu WORLD ✦</div>
+
+      <div class="progress-wrap">
+        <div class="progress-label" id="progressText">۰ از ۴ مرحله</div>
+        <div class="progress">
+          <span id="progressBar"></span>
+        </div>
+      </div>
+
+      <button id="sound" onclick="toggleSound()">
+        ♫ صدا: خاموش
+      </button>
+    </div>
+
+    <div class="world-title">
+      <h2>دنیای کوچک ما</h2>
+      <p>جزیره‌ها را انتخاب کن و ماجراجویی را شروع کن</p>
+    </div>
+
+    <div class="world-scene" id="scene">
+
+      <div class="island" id="island1" onclick="openLevel(1)">
+        <div class="label">نامه‌ای برای تو</div>
+        <div class="top"></div>
+        <div class="rock"></div>
+        <div class="light"></div>
+        <div class="number">LEVEL 01</div>
+      </div>
+
+      <div class="island locked" id="island2" onclick="openLevel(2)">
+        <div class="label">قلب‌های گمشده</div>
+        <div class="top"></div>
+        <div class="rock"></div>
+        <div class="light"></div>
+        <div class="number">LEVEL 02</div>
+      </div>
+
+      <div class="island locked" id="island3" onclick="openLevel(3)">
+        <div class="label">خاطرات ما</div>
+        <div class="top"></div>
+        <div class="rock"></div>
+        <div class="light"></div>
+        <div class="number">LEVEL 03</div>
+      </div>
+
+      <div class="island locked" id="island4" onclick="openLevel(4)">
+        <div class="label">جایزه نهایی</div>
+        <div class="top"></div>
+        <div class="rock"></div>
+        <div class="light"></div>
+        <div class="number">FINAL LEVEL</div>
+      </div>
+
+    </div>
+
+    <div class="world-hint">
+      ✦ برای ورود به هر جزیره روی آن کلیک کن ✦
+    </div>
+
+  </section>
+
+  <!-- LEVEL PANEL -->
+  <div id="panel">
+    <div class="panel-card">
+      <button class="close" onclick="closePanel()">✕</button>
+      <div id="panelContent"></div>
+    </div>
+  </div>
+
+  <!-- PHOTO VIEWER -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <img id="largePhoto" src="" alt="خاطره">
+  </div>
+
+</div>
+
+<script>
+
+/* STARS */
+
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+let stars = [];
+
+function resizeStars() {
+  const ratio = window.devicePixelRatio || 1;
+
+  canvas.width = innerWidth * ratio;
+  canvas.height = innerHeight * ratio;
+
+  ctx.setTransform(ratio,0,0,ratio,0,0);
+
+  stars = Array.from({length:150},()=>({
+    x:Math.random()*innerWidth,
+    y:Math.random()*innerHeight,
+    r:Math.random()*1.6+.3,
+    a:Math.random(),
+    speed:Math.random()*.012+.003
+  }));
+}
+
+function drawStars() {
+  ctx.clearRect(0,0,innerWidth,innerHeight);
+
+  stars.forEach(s=>{
+    s.a += s.speed;
+
+    const opacity = .35 + Math.sin(s.a)*.5;
+
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(190,225,255,${opacity})`;
+    ctx.fill();
+  });
+
+  requestAnimationFrame(drawStars);
+}
+
+resizeStars();
+drawStars();
+
+addEventListener("resize",resizeStars);
+
+
+/* GAME STATE */
+
+let completed = [];
+let soundOn = false;
+let audioContext = null;
+let foundHearts = 0;
+
+function startGame() {
+  showScreen("world");
+  beep(440,.12);
+}
+
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(screen=>{
+    screen.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+}
+
+function updateProgress() {
+
+  document.getElementById("progressText").textContent =
+    completed.length+" از ۴ مرحله";
+
+  document.getElementById("progressBar").style.width =
+    (completed.length/4*100)+"%";
+
+  for(let i=1;i<=4;i++) {
+    const island=document.getElementById("island"+i);
+
+    island.classList.toggle(
+      "locked",
+      i>completed.length+1
+    );
+  }
+}
+
+function finishLevel(level) {
+
+  if(!completed.includes(level)) {
+    completed.push(level);
+  }
+
+  updateProgress();
+}
+
+function openLevel(level) {
+
+  if(level>completed.length+1) {
+    beep(140,.15);
+    return;
+  }
+
+  if(level===1) levelOne();
+  else if(level===2) levelTwo();
+  else if(level===3) levelThree();
+  else if(level===4) levelFour();
+}
+
+function showPanel(html) {
+  document.getElementById("panelContent").innerHTML=html;
+  document.getElementById("panel").classList.add("show");
+}
+
+function closePanel() {
+  document.getElementById("panel").classList.remove("show");
+}
+
+
+/* LEVEL 1 */
+
+let letterTimer = null;
+
+function levelOne() {
+
+  showPanel(`
+    <div style="color:#8acfff;font-size:12px;letter-spacing:3px">
+      LEVEL 01
+    </div>
+
+    <h2>نامه‌ای برای تو 💌</h2>
+
+    <div class="type-text" id="typeText"></div>
+
+    <button class="small-btn" onclick="completeOne()">
+      ادامه ماجراجویی ✦
+    </button>
+  `);
+
+  if(letterTimer) clearInterval(letterTimer);
+
+  const message =
+  "بعضی آدم‌ها بدون اینکه متوجه شوند، دنیای اطرافشان را قشنگ‌تر می‌کنند... تو برای من یکی از همان آدم‌هایی. این دنیا شاید فقط چندتا جزیره و ستاره داشته باشد، اما چیزی که آن را خاص می‌کند، حضور توست. این ماجراجویی را فقط برای تو ساختم. 💙";
+
+  let i=0;
+  const target=document.getElementById("typeText");
+
+  letterTimer=setInterval(()=>{
+
+    if(!document.getElementById("panel").classList.contains("show")) {
+      clearInterval(letterTimer);
+      return;
+    }
+
+    target.textContent=message.slice(0,i);
+    i++;
+
+    if(i>message.length) {
+      clearInterval(letterTimer);
+    }
+
+  },45);
+}
+
+function completeOne() {
+  if(letterTimer) clearInterval(letterTimer);
+
+  finishLevel(1);
+  closePanel();
+  beep(600,.15);
+}
+
+
+/* LEVEL 2 */
+
+function levelTwo() {
+
+  foundHearts=0;
+
+  showPanel(`
+    <div style="color:#8acfff;font-size:12px;letter-spacing:3px">
+      LEVEL 02
+    </div>
+
+    <h2>قلب‌های گمشده 💙</h2>
+
+    <p>پنج قلب مخفی در این دنیا وجود دارد. همه‌شان را پیدا کن!</p>
+
+    <div class="score" id="score">
+      قلب‌های پیدا شده: ۰ از ۵
+    </div>
+
+    <div class="heart-game" id="heartGame"></div>
+
+    <button class="small-btn" id="heartNext"
+      style="display:none" onclick="completeTwo()">
+      مرحله بعدی
+    </button>
+  `);
+
+  const area=document.getElementById("heartGame");
+
+  const positions=[
+    [12,18],
+    [72,20],
+    [45,68],
+    [83,73],
+    [25,77]
+  ];
+
+  positions.forEach((p,i)=>{
+
+    const heart=document.createElement("button");
+
+    heart.className="hidden-heart";
+    heart.textContent="♡";
+    heart.style.left=p[0]+"%";
+    heart.style.top=p[1]+"%";
+
+    heart.onclick=()=>{
+
+      if(heart.dataset.found) return;
+
+      heart.dataset.found="yes";
+      heart.textContent="💙";
+      heart.style.transform="scale(1.7)";
+      heart.style.pointerEvents="none";
+
+      foundHearts++;
+
+      document.getElementById("score").textContent =
+        "قلب‌های پیدا شده: "+foundHearts+" از ۵";
+
+      beep(550+foundHearts*80,.1);
+
+      if(foundHearts===5) {
+
+        document.getElementById("heartNext").style.display="inline-block";
+
+        document.getElementById("score").textContent =
+          "آفرین! همه قلب‌ها را پیدا کردی ✨";
+      }
+    };
+
+    area.appendChild(heart);
+  });
+}
+
+function completeTwo() {
+  finishLevel(2);
+  closePanel();
+}
+
+
+/* LEVEL 3 */
+
+function levelThree() {
+
+  showPanel(`
+    <div style="color:#8acfff;font-size:12px;letter-spacing:3px">
+      LEVEL 03
+    </div>
+
+    <h2>گوشه‌ای از خاطرات ما ✨</h2>
+
+    <p>هر عکس، یک خاطره و هر خاطره، یک دلیل برای لبخند...</p>
+
+    <div class="gallery">
+
+      <img src="./photos/photo1.jpg"
+        onclick="openPhoto(this.src)" alt="خاطره اول">
+
+      <img src="./photos/photo2.jpg"
+        onclick="openPhoto(this.src)" alt="خاطره دوم">
+
+      <img src="./photos/photo3.jpg"
+        onclick="openPhoto(this.src)" alt="خاطره سوم">
+
+      <img src="./photos/photo4.jpg"
+        onclick="openPhoto(this.src)" alt="خاطره چهارم">
+
+      <img src="./photos/photo5.jpg"
+        onclick="openPhoto(this.src)" alt="خاطره پنجم">
+
+      <img src="./photos/photo6.jpg"
+        onclick="openPhoto(this.src)" alt="خاطره ششم">
+
+    </div>
+
+    <button class="small-btn" onclick="completeThree()">
+      این خاطره‌ها رو دیدم 💙
+    </button>
+  `);
+}
+
+function openPhoto(src) {
+  document.getElementById("largePhoto").src=src;
+  document.getElementById("lightbox").classList.add("show");
+}
+
+function closeLightbox() {
+  document.getElementById("lightbox").classList.remove("show");
+}
+
+function completeThree() {
+  finishLevel(3);
+  closePanel();
+}
+
+
+/* LEVEL 4 */
+
+function levelFour() {
+
+  showPanel(`
+    <div style="color:#8acfff;font-size:12px;letter-spacing:3px">
+      FINAL LEVEL
+    </div>
+
+    <h2>صندوق اسرار تو ✨</h2>
+
+    <p>تمام مرحله‌ها رو پشت سر گذاشتی. حالا روی صندوق کلیک کن...</p>
+
+    <div class="chest" id="chest" onclick="openChest()">
+      🎁
+    </div>
+
+    <div class="final-message" id="finalMessage">
+
+      <h2>تو جایزه‌ی این دنیایی 💙</h2>
+
+      <p>
+        شاید نتونم تمام زیبایی دنیا رو بهت هدیه بدم،
+        اما می‌تونم دنیایی بسازم که توی اون همیشه خاص‌ترین آدم باشی.
+
+        <br><br>
+
+        ممنون که هستی. این دنیا برای تو ساخته شده.
+
+        <br><br>
+
+        دوستت دارم ✦
+      </p>
+
+    </div>
+  `);
+}
+
+function openChest() {
+
+  const chest=document.getElementById("chest");
+
+  if(chest.dataset.opened) return;
+
+  chest.dataset.opened="yes";
+  chest.textContent="💎";
+  chest.style.transform="scale(1.3) rotate(10deg)";
+
+  document.getElementById("finalMessage").classList.add("show");
+
+  finishLevel(4);
+  beep(880,.35);
+}
+
+
+/* SOUND */
+
+function beep(freq,duration) {
+
+  if(!soundOn) return;
+
+  try {
+
+    audioContext=audioContext||
+      new (window.AudioContext||window.webkitAudioContext)();
+
+    if(audioContext.state==="suspended") {
+      audioContext.resume();
+    }
+
+    const osc=audioContext.createOscillator();
+    const gain=audioContext.createGain();
+
+    osc.frequency.value=freq;
+    osc.type="sine";
+
+    gain.gain.setValueAtTime(.06,audioContext.currentTime);
+
+    gain.gain.exponentialRampToValueAtTime(
+      .001,
+      audioContext.currentTime+duration
+    );
+
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+
+    osc.start();
+    osc.stop(audioContext.currentTime+duration);
+
+  } catch(e) {
+    console.log("Audio unavailable");
+  }
+}
+
+function toggleSound() {
+
+  soundOn=!soundOn;
+
+  document.getElementById("sound").textContent =
+    soundOn?"♫ صدا: روشن":"♫ صدا: خاموش";
+
+  if(soundOn) beep(550,.15);
+}
+
+
+/* CAMERA MOVEMENT */
+
+const scene=document.getElementById("scene");
+
+function moveCamera(x,y) {
+
+  const rx=(y/innerHeight-.5)*-7;
+  const ry=(x/innerWidth-.5)*8;
+
+  scene.style.transform=
+    `rotateX(${rx}deg) rotateY(${ry}deg)`;
+}
+
+addEventListener("mousemove",e=>{
+  moveCamera(e.clientX,e.clientY);
+});
+
+addEventListener("touchmove",e=>{
+
+  if(e.touches.length) {
+    moveCamera(
+      e.touches[0].clientX,
+      e.touches[0].clientY
+    );
+  }
+
+},{passive:true});
+
+
+/* ESCAPE KEY */
+
+addEventListener("keydown",e=>{
+
+  if(e.key==="Escape") {
+    closeLightbox();
+    closePanel();
+  }
+
+});
+
+
+/* INITIALIZE */
+
+updateProgress();
+
+</script>
+</body>
+</html>
